@@ -1,0 +1,66 @@
+{
+  "users": [
+    {
+      "id": "u_demo",
+      "name": "Demo User",
+      "handle": "u_demo",
+      "avatar": "https://i.pravatar.cc/200?img=5",
+      "belt": "BJJ Blue Belt",
+      "gym": "DojoNet Academy"
+    }
+  ],
+  "journals": [
+    {
+      "id": "j_demo_1",
+      "userId": "u_demo",
+      "title": "BJJ Class – Guard Retention",
+      "body": "Drilled hip escapes, knee shields. Struggled vs pressure passing. Note to frame earlier.",
+      "createdAt": "2025-10-25T18:00:00.000Z",
+      "journalMeta": {
+        "art": "BJJ",
+        "sessionType": "Class",
+        "durationMin": 90,
+        "techniques": ["Hip Escape", "Knee Shield", "Collar Tie"],
+        "mood": "good",
+        "energy": 7,
+        "intensity": 6,
+        "recovery": 6,
+        "injured": false
+      }
+    }
+  ],
+  "techniques": [
+    {
+      "id": "t_demo_1",
+      "userId": "u_demo",
+      "name": "Hip Escape",
+      "proficiency": "Intermediate",
+      "notes": "Use more hip drive."
+    }
+  ],
+  "goals": [
+    {
+      "id": "g_demo_1",
+      "userId": "u_demo",
+      "goal": "Train 3x/week",
+      "completed": false
+    }
+  ],
+  "sparring": [
+    {
+      "id": "s_demo_1",
+      "userId": "u_demo",
+      "partner": "Jane",
+      "outcome": "Win",
+      "submissions": ["Armbar"]
+    }
+  ],
+  "partners": [
+    {
+      "id": "p_demo_1",
+      "userId": "u_demo",
+      "name": "Jane",
+      "lastTrained": "2025-10-20"
+    }
+  ]
+}

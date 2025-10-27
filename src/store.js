@@ -303,10 +303,29 @@ export const useStore = create((set, get) => ({
     const session = { userId: null };
     set({ session }); LS.set('session', session);
   },
-  loginAsDemo(){
+  async loginAsDemo(){
+    // Load demo data from static file
+    try {
+      const res = await fetch('/DojoNet-Prototype-MAX/demo-data.json');
+      const demoData = await res.json();
+      // Seed users
+      localStorage.setItem('users', JSON.stringify(demoData.users));
+      // Seed journals
+      localStorage.setItem('journals_u_demo', JSON.stringify(demoData.journals));
+      // Seed techniques
+      localStorage.setItem('techniques_u_demo', JSON.stringify(demoData.techniques));
+      // Seed goals
+      localStorage.setItem('goals_u_demo', JSON.stringify(demoData.goals));
+      // Seed sparring
+      localStorage.setItem('sparring_u_demo', JSON.stringify(demoData.sparring));
+      // Seed partners
+      localStorage.setItem('partners_u_demo', JSON.stringify(demoData.partners));
+    } catch (e) {
+      // fallback to legacy seed if fetch fails
+      seedDemoJournals();
+    }
     const session = { userId: DEMO_USER.id };
     localStorage.setItem('session', JSON.stringify(session));
-    seedDemoJournals();
     set({ session }); 
     LS.set('session', session);
     return { ok: true, user: DEMO_USER };
