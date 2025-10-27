@@ -1,7 +1,7 @@
 // SuggestedPartnersWidget: Show 2-3 partner suggestions with quick match buttons
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useStore } from '../../store'
+import { useStore } from '../../app/store'
 import { Icon, icons } from '../../lib/icons'
 
 export default function SuggestedPartnersWidget() {
@@ -65,7 +65,7 @@ export default function SuggestedPartnersWidget() {
                 </p>
               </Link>
               <p className="text-xs text-[var(--color-text-muted)] truncate">
-                {user.rank} • {user.primaryArt}
+                {user.rank}
               </p>
               {user.location === me.location && (
                 <p className="text-xs text-[var(--accent-primary)] flex items-center gap-1 mt-0.5">
