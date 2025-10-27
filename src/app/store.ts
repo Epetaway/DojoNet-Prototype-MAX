@@ -1,3 +1,13 @@
+  // Get journals for a user (for dashboard widgets)
+  getJournals(userId: string, filters: any = {}) {
+    // Try to load from localStorage (seeded by demo-data.json)
+    const journals = LS.get(`journals_${userId}`, []) as any[];
+    // Optionally filter
+    let filtered = journals;
+    if (filters.art) filtered = filtered.filter(j => j.journalMeta?.art === filters.art);
+    if (filters.sessionType) filtered = filtered.filter(j => j.journalMeta?.sessionType === filters.sessionType);
+    return filtered.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  },
 import { create } from 'zustand'
 import { LS, uid } from '../lib/storage'
 import { USE_BACKEND, api } from '../lib/api'
@@ -57,6 +67,14 @@ const initialUsers: User[] = LS.get('users', seedUsers())
 const initialSession: Session = LS.get('session', { userId: null })
 
 export const useStore = create<StoreState>((set, get) => ({
+  // Get journals for a user (for dashboard widgets)
+  getJournals(userId: string, filters: any = {}) {
+    const journals = LS.get(`journals_${userId}`, []) as any[];
+    let filtered = journals;
+    if (filters.art) filtered = filtered.filter(j => j.journalMeta?.art === filters.art);
+    if (filters.sessionType) filtered = filtered.filter(j => j.journalMeta?.sessionType === filters.sessionType);
+    return filtered.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  },
   // Auth slice
   session: initialSession,
   login(nameLike) {
