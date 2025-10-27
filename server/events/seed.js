@@ -1,0 +1,98 @@
+// Seed events for local development when external adapters are blocked
+export const seedEvents = [
+  {
+    sourceKey: 'seed',
+    title: 'IBJJF New York Fall Open 2025',
+    kind: 'BJJ',
+    start: '2025-11-15T09:00:00Z',
+    venue: { city: 'New York', state: 'NY', country: 'US' },
+    description: 'Annual IBJJF tournament featuring Gi and No-Gi divisions for all belt levels.',
+    registerUrl: 'https://ibjjf.com',
+    organizer: { name: 'IBJJF', url: 'https://ibjjf.com' },
+    tags: ['BJJ', 'Tournament', 'Gi', 'NoGi'],
+    imageUrl: 'https://images.unsplash.com/photo-1555597673-b21d5c935865?w=1200&auto=format&fit=crop',
+    verified: true,
+    popularity: 0.9
+  },
+  {
+    sourceKey: 'seed',
+    title: 'NAGA New Jersey Grappling Championship',
+    kind: 'BJJ',
+    start: '2025-11-22T08:00:00Z',
+    venue: { city: 'Newark', state: 'NJ', country: 'US' },
+    description: 'North American Grappling Association tournament with Gi and No-Gi brackets.',
+    registerUrl: 'https://nagafighter.com',
+    organizer: { name: 'NAGA', url: 'https://nagafighter.com' },
+    tags: ['BJJ', 'Tournament', 'Grappling'],
+    imageUrl: 'https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=1200&auto=format&fit=crop',
+    verified: true,
+    popularity: 0.85
+  },
+  {
+    sourceKey: 'seed',
+    title: 'Weekend Open Mat - All Levels Welcome',
+    kind: 'BJJ',
+    start: '2025-10-26T10:00:00Z',
+    venue: { city: 'Hoboken', state: 'NJ', country: 'US' },
+    description: 'Free open mat session for practitioners of all levels. Bring your own gi.',
+    registerUrl: 'https://example.com/openmat',
+    organizer: { name: 'Hudson BJJ', url: 'https://example.com' },
+    tags: ['BJJ', 'OpenMat', 'Training'],
+    imageUrl: 'https://images.unsplash.com/photo-1517438476312-10d79c077509?w=1200&auto=format&fit=crop',
+    popularity: 0.6
+  },
+  {
+    sourceKey: 'seed',
+    title: 'Andre Galvao Seminar - Guard Passing Mastery',
+    kind: 'Seminar',
+    start: '2025-11-08T14:00:00Z',
+    venue: { city: 'Brooklyn', state: 'NY', country: 'US' },
+    description: 'Learn advanced guard passing techniques from multiple-time world champion Andre Galvao.',
+    registerUrl: 'https://example.com/seminar',
+    organizer: { name: 'Atos NYC', url: 'https://example.com' },
+    tags: ['BJJ', 'Seminar', 'GuardPassing'],
+    imageUrl: 'https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?w=1200&auto=format&fit=crop',
+    verified: true,
+    popularity: 0.95
+  },
+  {
+    sourceKey: 'seed',
+    title: 'Tri-State Judo Championship',
+    kind: 'Judo',
+    start: '2025-12-05T09:00:00Z',
+    venue: { city: 'Stamford', state: 'CT', country: 'US' },
+    description: 'Regional judo competition for all ages and weight classes.',
+    registerUrl: 'https://example.com/judo',
+    organizer: { name: 'Tri-State Judo', url: 'https://example.com' },
+    tags: ['Judo', 'Tournament', 'Competition'],
+    imageUrl: 'https://images.unsplash.com/photo-1555597408-26bc8e548a46?w=1200&auto=format&fit=crop',
+    popularity: 0.7
+  },
+  {
+    sourceKey: 'seed',
+    title: 'UFC 300 Watch Party',
+    kind: 'Social',
+    start: '2025-11-30T19:00:00Z',
+    venue: { city: 'Jersey City', state: 'NJ', country: 'US' },
+    description: 'Join us for food, drinks, and live UFC action on the big screens.',
+    registerUrl: 'https://example.com/watchparty',
+    organizer: { name: 'Renzo Gracie JC', url: 'https://example.com' },
+    tags: ['MMA', 'Social', 'WatchParty'],
+    imageUrl: 'https://images.unsplash.com/photo-1517438184086-5f3aa8c49f4f?w=1200&auto=format&fit=crop',
+    popularity: 0.75
+  },
+  {
+    sourceKey: 'seed',
+    title: 'Smoothcomp Connecticut BJJ Open',
+    kind: 'BJJ',
+    start: '2025-12-12T08:30:00Z',
+    venue: { city: 'Hartford', state: 'CT', country: 'US' },
+    description: 'IBJJF-rules tournament organized via Smoothcomp platform.',
+    registerUrl: 'https://smoothcomp.com',
+    organizer: { name: 'Smoothcomp', url: 'https://smoothcomp.com' },
+    tags: ['BJJ', 'Tournament', 'Gi'],
+    imageUrl: 'https://images.unsplash.com/photo-1540206395-68808572332f?w=1200&auto=format&fit=crop',
+    verified: true,
+    popularity: 0.8
+  }
+]

@@ -1,0 +1,201 @@
+{
+  "users": [
+    {
+      "id": "u_jason",
+      "name": "Jason Doe",
+      "rank": "Blue Belt",
+      "gym": "Cobra MMA",
+      "location": "Los Angeles, CA",
+      "bio": "Flow like water. Student first.",
+      "status": "Training Muay Thai tonight",
+      "avatar": "https://i.pravatar.cc/200?img=12",
+      "banner": "",
+      "theme": "tatami",
+      "layout": {
+        "left": ["bio", "belt", "gym", "badges"],
+        "right": ["playlist", "posts", "friends", "stats"]
+      },
+      "playlist": "https://open.spotify.com/embed/playlist/37i9dQZF1DX76Wlfdnj7AP?utm_source=generator",
+      "posts": [
+        { "id": "p_seed1", "title": "Road to the next level", "date": "2 days ago" }
+      ],
+      "friends": [],
+      "following": [],
+      "followers": [],
+      "dojoCircle": [],
+      "comments": [],
+      "verifiedGym": false,
+      "rankLevel": 2
+    },
+    {
+      "id": "u_maria",
+      "name": "Maria Tan",
+      "rank": "Purple Belt",
+      "gym": "Eastside BJJ",
+      "location": "Seattle, WA",
+      "bio": "Grip fight, breathe, flow.",
+      "status": "No-gi tonight",
+      "avatar": "https://i.pravatar.cc/200?img=45",
+      "banner": "",
+      "theme": "iron",
+      "layout": {
+        "left": ["bio", "belt", "gym", "badges"],
+        "right": ["posts", "friends", "stats"]
+      },
+      "playlist": "",
+      "posts": [
+        { "id": "p_seed2", "title": "Passing notes", "date": "Mar 28" }
+      ],
+      "friends": [],
+      "following": [],
+      "followers": [],
+      "dojoCircle": [],
+      "comments": [],
+      "verifiedGym": true,
+      "rankLevel": 3
+    },
+    {
+      "id": "u_lee",
+      "name": "Lee Park",
+      "rank": "Brown Belt",
+      "gym": "Tiger Muay Thai",
+      "location": "NYC, NY",
+      "bio": "Kick low. Check high.",
+      "status": "Padwork 6am",
+      "avatar": "https://i.pravatar.cc/200?img=33",
+      "banner": "",
+      "theme": "neon",
+      "layout": {
+        "left": ["bio", "belt", "gym"],
+        "right": ["posts", "friends", "stats"]
+      },
+      "playlist": "",
+      "posts": [
+        { "id": "p_seed3", "title": "Southpaw angles", "date": "1 week ago" }
+      ],
+      "friends": [],
+      "following": [],
+      "followers": [],
+      "dojoCircle": [],
+      "comments": [],
+      "verifiedGym": false,
+      "rankLevel": 4
+    }
+  ],
+  "events": [
+    {
+      "id": "e_openmat",
+      "title": "Sunday Open Mat",
+      "date": "2025-10-26T10:00:00-05:00",
+      "description": "Casual rounds and drilling. All affiliations welcome.",
+      "location": { "venue": "Eastside BJJ", "address": "123 Maple St", "city": "Seattle", "state": "WA", "zip": "98101" },
+      "link": "",
+      "imageUrl": "",
+      "tags": ["Open Mat", "BJJ"],
+      "type": "event",
+      "verified": true
+    },
+    {
+      "id": "e_seminar",
+      "title": "Leg Lock Seminar",
+      "date": "2025-11-02T14:00:00-05:00",
+      "description": "Fundamentals of lower body submissions with Q&A.",
+      "location": { "venue": "Cobra MMA", "address": "456 Oak Ave", "city": "Los Angeles", "state": "CA", "zip": "90001" },
+      "link": "https://example.com/leg-lock-seminar",
+      "imageUrl": "/placeholders/events/event_leglocks.jpg",
+      "tags": ["BJJ", "Seminar"],
+      "type": "event",
+      "verified": false
+    },
+    {
+      "id": "evt2001",
+      "title": "Rigan Machado Brazilian Jiu-Jitsu Seminar – South Jersey",
+      "date": "2025-11-08T11:00:00-05:00",
+      "location": {
+        "venue": "Snake Pit U.S.A. MMA/Machado Jiu-Jitsu",
+        "address": "900 12th St, Suites A-3 & A-4",
+        "city": "Hammonton",
+        "state": "NJ",
+        "zip": "08037"
+      },
+      "description": "8th Degree Red/White Coral Belt, Brazilian Jiu-Jitsu Master Rigan Machado Seminar (GI Seminar).",
+      "link": "https://www.eventbrite.com/e/rigan-machado-brazilian-jiu-jitsu-seminar-8-november-in-south-jersey-tickets-1549614571899",
+      "imageUrl": "/placeholders/events/rigan_machado_seminar.jpg",
+      "tags": ["BJJ", "Seminar", "GI", "South Jersey"],
+      "type": "event",
+      "verified": true
+    },
+    {
+      "id": "evt2002",
+      "title": "North American Grappling & BJJ Championship – Hillsborough, NJ",
+      "date": "2025-11-22T08:00:00-05:00",
+      "location": {
+        "venue": "Iron Peak Sports & Events",
+        "address": "137 Mountain View Rd.",
+        "city": "Hillsborough Township",
+        "state": "NJ",
+        "zip": "08844"
+      },
+      "description": "Grappling tournament hosted by NAGA offering both gi and no-gi divisions.",
+      "link": "https://www.nagafighter.com/event/north-american-grappling-bjj-championship-hillsborough-nj/",
+      "imageUrl": "/placeholders/events/naga_hillsborough_2025.jpg",
+      "tags": ["Grappling", "Tournament", "No-Gi", "Gi"],
+      "type": "event",
+      "verified": true
+    },
+    {
+      "id": "evt2003",
+      "title": "New Jersey Fall International Open IBJJF Jiu-Jitsu No-Gi Championship 2025",
+      "date": "2025-11-22T00:00:00-05:00",
+      "location": {
+        "venue": "Meadowlands Exposition Center",
+        "address": "355 Plaza Drive",
+        "city": "Secaucus",
+        "state": "NJ",
+        "zip": "07094"
+      },
+      "description": "Major IBJJF-sanctioned tournament with gi & no-gi divisions open to athletes across belt and age ranges.",
+      "link": "https://ibjjf.com/events/new-jersey-fall-international-open-ibjjf-jiu-jitsu-no-gi-championship-2025",
+      "imageUrl": "/placeholders/events/nj_fall_int_open_2025.jpg",
+      "tags": ["IBJJF", "Tournament", "No-Gi", "Gi"],
+      "type": "event",
+      "verified": true
+    },
+    {
+      "id": "evt2004",
+      "title": "Gut Check Championship Series 59 – Muay Thai & Kickboxing",
+      "date": "2025-11-15T19:00:00-05:00",
+      "location": {
+        "venue": "NBN Sports Academy",
+        "address": "4101 Newport Gap Pike",
+        "city": "Wilmington",
+        "state": "DE",
+        "zip": "19808"
+      },
+      "description": "Muay Thai & Kickboxing event from Gut Check Promotions covering the Philadelphia/Delaware region.",
+      "link": "https://gutcheckpromotions.com/event/gut-check-championship-series-59-Nov-15-2025",
+      "imageUrl": "/placeholders/events/gut_check_59.jpg",
+      "tags": ["Muay Thai", "Kickboxing", "Combat Sports"],
+      "type": "event",
+      "verified": true
+    },
+    {
+      "id": "evt2005",
+      "title": "BJJ Seminar with Professor Marcos Santos – No Limit Martial Arts",
+      "date": "2025-11-13T19:30:00-05:00",
+      "location": {
+        "venue": "No Limit Martial Arts",
+        "address": "457 Mt Pleasant Ave",
+        "city": "West Orange",
+        "state": "NJ",
+        "zip": "07052"
+      },
+      "description": "Exclusive Brazilian Jiu-Jitsu seminar featuring Professor Marcos Santos, 6th Degree Black Belt & pioneer BJJ instructor.",
+      "link": "https://allevents.in/west-orange/bjj-seminar-with-professor-marcos-santos-no-limit-martial-arts/200028952709527",
+      "imageUrl": "/placeholders/events/bjj_seminar_santos.jpg",
+      "tags": ["BJJ", "Seminar", "Instructor"],
+      "type": "event",
+      "verified": true
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+[
+  {
+    "id": "e_openmat",
+    "title": "Sunday Open Mat",
+    "date": "2025-10-26T10:00:00-05:00",
+    "description": "Casual rounds and drilling. All affiliations welcome.",
+    "location": {
+      "venue": "Eastside BJJ",
+      "address": "123 Maple St",
+      "city": "Seattle",
+      "state": "WA",
+      "zip": "98101"
+    },
+    "link": "",
+    "imageUrl": "https://images.unsplash.com/photo-1517438476312-10d79c077509?w=1200&auto=format&fit=crop",
+    "tags": ["Open Mat", "BJJ"],
+    "type": "event",
+    "verified": true
+  },
+  {
+    "id": "e_seminar",
+    "title": "Leg Lock Seminar",
+    "date": "2025-11-02T14:00:00-05:00",
+    "description": "Fundamentals of lower body submissions with Q&A.",
+    "location": {
+      "venue": "Cobra MMA",
+      "address": "456 Oak Ave",
+      "city": "Los Angeles",
+      "state": "CA",
+      "zip": "90001"
+    },
+    "link": "https://example.com/leg-lock-seminar",
+    "imageUrl": "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=1200&auto=format&fit=crop",
+    "tags": ["BJJ", "Seminar"],
+    "type": "event",
+    "verified": false
+  },
+  {
+    "id": "evt2001",
+    "title": "Rigan Machado Brazilian Jiu-Jitsu Seminar – South Jersey",
+    "date": "2025-11-08T11:00:00-05:00",
+    "location": {
+      "venue": "Snake Pit U.S.A. MMA/Machado Jiu-Jitsu",
+      "address": "900 12th St, Suites A-3 & A-4",
+      "city": "Hammonton",
+      "state": "NJ",
+      "zip": "08037"
+    },
+    "description": "8th Degree Red/White Coral Belt, Brazilian Jiu-Jitsu Master Rigan Machado Seminar (GI Seminar).",
+    "link": "https://www.eventbrite.com/e/rigan-machado-brazilian-jiu-jitsu-seminar-8-november-in-south-jersey-tickets-1549614571899",
+    "imageUrl": "https://images.unsplash.com/photo-1555597673-b21d5c935865?w=1200&auto=format&fit=crop",
+    "tags": ["BJJ", "Seminar", "GI", "South Jersey"],
+    "type": "event",
+    "verified": true
+  },
+  {
+    "id": "evt2002",
+    "title": "North American Grappling & BJJ Championship – Hillsborough, NJ",
+    "date": "2025-11-22T08:00:00-05:00",
+    "location": {
+      "venue": "Iron Peak Sports & Events",
+      "address": "137 Mountain View Rd.",
+      "city": "Hillsborough Township",
+      "state": "NJ",
+      "zip": "08844"
+    },
+    "description": "Grappling tournament hosted by NAGA offering both gi and no-gi divisions.",
+    "link": "https://www.nagafighter.com/event/north-american-grappling-bjj-championship-hillsborough-nj/",
+    "imageUrl": "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=1200&auto=format&fit=crop",
+    "tags": ["Grappling", "Tournament", "No-Gi", "Gi"],
+    "type": "event",
+    "verified": true
+  },
+  {
+    "id": "evt2003",
+    "title": "New Jersey Fall International Open IBJJF Jiu-Jitsu No-Gi Championship 2025",
+    "date": "2025-11-22T00:00:00-05:00",
+    "location": {
+      "venue": "Meadowlands Exposition Center",
+      "address": "355 Plaza Drive",
+      "city": "Secaucus",
+      "state": "NJ",
+      "zip": "07094"
+    },
+    "description": "Major IBJJF-sanctioned tournament with gi & no-gi divisions open to athletes across belt and age ranges.",
+    "link": "https://ibjjf.com/events/new-jersey-fall-international-open-ibjjf-jiu-jitsu-no-gi-championship-2025",
+    "imageUrl": "https://images.unsplash.com/photo-1555597673-b21d5c935865?w=1200&auto=format&fit=crop",
+    "tags": ["IBJJF", "Tournament", "No-Gi", "Gi"],
+    "type": "event",
+    "verified": true
+  },
+  {
+    "id": "evt2004",
+    "title": "Gut Check Championship Series 59 – Muay Thai & Kickboxing",
+    "date": "2025-11-15T19:00:00-05:00",
+    "location": {
+      "venue": "NBN Sports Academy",
+      "address": "4101 Newport Gap Pike",
+      "city": "Wilmington",
+      "state": "DE",
+      "zip": "19808"
+    },
+    "description": "Muay Thai & Kickboxing event from Gut Check Promotions covering the Philadelphia/Delaware region.",
+    "link": "https://gutcheckpromotions.com/event/gut-check-championship-series-59-Nov-15-2025",
+    "imageUrl": "https://images.unsplash.com/photo-1551731409-43eb3e517a1a?w=1200&auto=format&fit=crop",
+    "tags": ["Muay Thai", "Kickboxing", "Combat Sports"],
+    "type": "event",
+    "verified": true
+  },
+  {
+    "id": "evt2005",
+    "title": "BJJ Seminar with Professor Marcos Santos – No Limit Martial Arts",
+    "date": "2025-11-13T19:30:00-05:00",
+    "location": {
+      "venue": "No Limit Martial Arts",
+      "address": "457 Mt Pleasant Ave",
+      "city": "West Orange",
+      "state": "NJ",
+      "zip": "07052"
+    },
+    "description": "Exclusive Brazilian Jiu-Jitsu seminar featuring Professor Marcos Santos, 6th Degree Black Belt & pioneer BJJ instructor.",
+    "link": "https://allevents.in/west-orange/bjj-seminar-with-professor-marcos-santos-no-limit-martial-arts/200028952709527",
+    "imageUrl": "https://images.unsplash.com/photo-1555597408-26bc8e548a46?w=1200&auto=format&fit=crop",
+    "tags": ["BJJ", "Seminar", "Instructor"],
+    "type": "event",
+    "verified": true
+  }
+]

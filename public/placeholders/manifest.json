@@ -1,0 +1,9 @@
+[
+  { "section": "events", "filename": "events/event_bjj.svg" },
+  { "section": "events", "filename": "events/event_muaythai.svg" },
+  { "section": "events", "filename": "events/event_karate.svg" },
+  { "section": "events", "filename": "events/event_mma.svg" },
+  { "section": "events", "filename": "events/event_judo.svg" },
+  { "section": "events", "filename": "events/event_wrestling.svg" },
+  { "section": "hero", "filename": "hero/hero_mats.svg" }
+]

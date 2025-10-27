@@ -1,0 +1,300 @@
+// Prisma schema for DojoNet production backend
+// datasource: PostgreSQL
+// generator: Prisma Client
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Visibility {
+  PRIVATE
+  FRIENDS
+  PUBLIC
+}
+
+enum Role {
+  STUDENT
+  INSTRUCTOR
+  PROFESSOR
+  OWNER
+  ADMIN
+  MOD
+}
+
+enum VoteValue {
+  UP
+  DOWN
+}
+
+enum ContentType {
+  THREAD
+  POST
+  COMMENT
+  JOURNAL
+}
+
+model User {
+  id          String    @id @default(cuid())
+  email       String    @unique
+  username    String    @unique
+  passwordHash String?  // bcrypt hash; optional for OAuth-only users
+  role        Role      @default(STUDENT)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  profile     Profile?
+  journals    Journal[]
+  threads     Thread[]
+  posts       Post[]
+  comments    Comment[]
+  votes       Vote[]
+  reactions   Reaction[]
+  jComments   JComment[]
+
+  followers   Follow[]  @relation("Followers")
+  following   Follow[]  @relation("Following")
+  blocks      Block[]   @relation("UserBlocks")
+  blockedBy   Block[]   @relation("BlockedUsers")
+
+  notifications Notification[]
+  conversations Conversation[]
+  messages      Message[]
+}
+
+model Profile {
+  id          String       @id @default(cuid())
+  userId      String       @unique
+  name        String
+  tagline     String?
+  location    String?
+  interests   String[]     // ["bjj","muay-thai","wrestling"]
+  avatar      String?
+  banner      String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  affiliation Affiliation?
+
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Affiliation {
+  id         String   @id @default(cuid())
+  profileId  String   @unique
+  school     String
+  beltOrRank String
+  years      Int
+  status     String   // PENDING, APPROVED, REJECTED
+  verifiedBy String?  // userId of verifier (nullable)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  profile    Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+}
+
+model Follow {
+  id         String   @id @default(cuid())
+  followerId String
+  followeeId String
+  createdAt  DateTime @default(now())
+
+  follower   User     @relation("Following", fields: [followerId], references: [id], onDelete: Cascade)
+  followee   User     @relation("Followers", fields: [followeeId], references: [id], onDelete: Cascade)
+
+  @@unique([followerId, followeeId])
+  @@index([followerId])
+  @@index([followeeId])
+}
+
+model Block {
+  id        String   @id @default(cuid())
+  byUserId  String
+  blockedId String
+  createdAt DateTime @default(now())
+
+  byUser    User     @relation("UserBlocks", fields: [byUserId], references: [id], onDelete: Cascade)
+  blocked   User     @relation("BlockedUsers", fields: [blockedId], references: [id], onDelete: Cascade)
+
+  @@unique([byUserId, blockedId])
+  @@index([byUserId])
+}
+
+model Journal {
+  id         String     @id @default(cuid())
+  authorId   String
+  title      String?
+  body       String     @db.Text
+  mediaUrls  String[]
+  visibility Visibility @default(PRIVATE)
+  tags       String[]
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  isDeleted  Boolean    @default(false)
+
+  author     User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  reactions  Reaction[]
+  comments   JComment[]
+
+  @@index([authorId, createdAt(sort: Desc)])
+  @@index([visibility, createdAt(sort: Desc)])
+}
+
+model JComment {
+  id        String   @id @default(cuid())
+  journalId String
+  authorId  String
+  body      String   @db.Text
+  createdAt DateTime @default(now())
+  parentId  String?
+  isDeleted Boolean  @default(false)
+
+  journal   Journal  @relation(fields: [journalId], references: [id], onDelete: Cascade)
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([journalId, createdAt])
+  @@index([parentId])
+}
+
+model Thread {
+  id                    String     @id @default(cuid())
+  authorId              String
+  title                 String
+  tags                  String[]
+  createdAt             DateTime   @default(now())
+  updatedAt             DateTime   @updatedAt
+  visibility            Visibility @default(PUBLIC)
+  promotedFromJournalId String?
+  votesUp               Int        @default(0)
+  votesDown             Int        @default(0)
+  score                 Float      @default(0)
+  isLocked              Boolean    @default(false)
+  isDeleted             Boolean    @default(false)
+
+  author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  post      Post?
+  comments  Comment[]
+
+  @@index([score(sort: Desc), id])
+  @@index([createdAt(sort: Desc), id])
+  @@index([tags], type: Gin)
+}
+
+model Post {
+  id        String    @id @default(cuid())
+  threadId  String    @unique
+  authorId  String
+  body      String    @db.Text
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  isDeleted Boolean   @default(false)
+
+  thread    Thread    @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  comments  Comment[]
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  threadId  String
+  postId    String
+  parentId  String?
+  authorId  String
+  body      String   @db.Text
+  createdAt DateTime @default(now())
+  votesUp   Int      @default(0)
+  votesDown Int      @default(0)
+  isDeleted Boolean  @default(false)
+
+  thread    Thread   @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([threadId, createdAt])
+  @@index([parentId])
+}
+
+model Vote {
+  id         String      @id @default(cuid())
+  userId     String
+  targetType ContentType
+  targetId   String
+  value      VoteValue
+  createdAt  DateTime    @default(now())
+
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, targetType, targetId])
+  @@index([targetType, targetId])
+}
+
+model Reaction {
+  id        String   @id @default(cuid())
+  journalId String
+  userId    String
+  kind      String   // like, helpful, insightful, fire, saved
+  createdAt DateTime @default(now())
+
+  journal   Journal  @relation(fields: [journalId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([journalId, userId, kind])
+  @@index([journalId, kind])
+}
+
+model Report {
+  id         String   @id @default(cuid())
+  reporterId String
+  targetType String   // THREAD, POST, COMMENT, JOURNAL, USER
+  targetId   String
+  reason     String   @db.Text
+  status     String   @default("PENDING") // PENDING, REVIEWED, RESOLVED
+  createdAt  DateTime @default(now())
+  reviewedBy String?
+
+  @@index([status, createdAt])
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  kind      String   // like, reply, share, mention, follow, message
+  payload   Json     // flexible JSON blob
+  readAt    DateTime?
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt(sort: Desc)])
+}
+
+model Conversation {
+  id             String    @id @default(cuid())
+  participantIds String[]
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  participants   User[]
+  messages       Message[]
+
+  @@index([participantIds], type: Gin)
+}
+
+model Message {
+  id             String   @id @default(cuid())
+  conversationId String
+  senderId       String
+  body           String   @db.Text
+  mediaUrl       String?
+  createdAt      DateTime @default(now())
+  readBy         String[]
+
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender         User         @relation(fields: [senderId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId, createdAt])
+}
