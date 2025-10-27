@@ -131,26 +131,31 @@ export default function TrainingJournalEnhanced() {
 
   // Load data from localStorage
   const [techniques, setTechniques] = useState<Technique[]>(() => {
+    if (!session.userId) return []
     const stored = localStorage.getItem(`techniques_${session.userId}`)
     return stored ? JSON.parse(stored) : []
   })
 
   const [goals, setGoals] = useState<Goal[]>(() => {
+    if (!session.userId) return []
     const stored = localStorage.getItem(`goals_${session.userId}`)
     return stored ? JSON.parse(stored) : []
   })
 
   const [sparringRounds, setSparringRounds] = useState<SparringRound[]>(() => {
+    if (!session.userId) return []
     const stored = localStorage.getItem(`sparringRounds_${session.userId}`)
     return stored ? JSON.parse(stored) : []
   })
 
   const [partners, setPartners] = useState<TrainingPartner[]>(() => {
+    if (!session.userId) return []
     const stored = localStorage.getItem(`trainingPartners_${session.userId}`)
     return stored ? JSON.parse(stored) : []
   })
 
   const [competitions, setCompetitions] = useState<Competition[]>(() => {
+    if (!session.userId) return []
     const stored = localStorage.getItem(`competitions_${session.userId}`)
     return stored ? JSON.parse(stored) : []
   })

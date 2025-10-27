@@ -68,22 +68,26 @@ export default function TrainingJournal() {
 
   // Load techniques and goals from localStorage
   const [techniques, setTechniques] = useState<Technique[]>(() => {
+    if (!session.userId) return []
     const stored = localStorage.getItem(`techniques_${session.userId}`)
     return stored ? JSON.parse(stored) : []
   })
 
   const [goals, setGoals] = useState<Goal[]>(() => {
+    if (!session.userId) return []
     const stored = localStorage.getItem(`goals_${session.userId}`)
     return stored ? JSON.parse(stored) : []
   })
 
   // NEW: Sparring rounds & partners from localStorage
   const [sparringRounds, setSparringRounds] = useState<SparringRound[]>(() => {
+    if (!session.userId) return []
     const stored = localStorage.getItem(`sparringRounds_${session.userId}`)
     return stored ? JSON.parse(stored) : []
   })
 
   const [partners, setPartners] = useState<TrainingPartner[]>(() => {
+    if (!session.userId) return []
     const stored = localStorage.getItem(`trainingPartners_${session.userId}`)
     return stored ? JSON.parse(stored) : []
   })
