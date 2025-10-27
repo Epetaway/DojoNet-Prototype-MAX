@@ -13,7 +13,7 @@ export default function Login(){
   const [qp] = useSearchParams()
   const intent = qp.get('intent')
   const isDev = import.meta.env.DEV
-  const { login } = useStore()
+  const { login, loginAsDemo } = useStore()
   
   useEffect(()=>{
     if(isDev){
@@ -54,6 +54,12 @@ export default function Login(){
       alert('Demo account is unavailable. Try again or sign up.')
     }
   }
+
+  const onQuickDemo = (e) => {
+    e.preventDefault()
+    loginAsDemo()
+    nav(intent || '/dashboard')
+  }
   return (
     <div className="max-w-md mx-auto px-4 py-10">
       <div className="card p-6 space-y-4">
@@ -72,6 +78,17 @@ export default function Login(){
             </div>
           </div>
         )}
+        <div className="pt-2 border-t border-[var(--color-border)]">
+          <button
+            onClick={onQuickDemo}
+            className="w-full px-4 py-2 rounded-xl bg-[var(--color-primary)] text-white hover:opacity-90 transition-opacity"
+          >
+            Continue as Demo
+          </button>
+          <div className="mt-2 text-xs text-center text-[var(--color-text-muted)]">
+            Quick access with sample journal data
+          </div>
+        </div>
       </div>
     </div>
   )

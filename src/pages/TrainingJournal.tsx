@@ -55,7 +55,7 @@ interface TrainingPartner {
 }
 
 export default function TrainingJournal() {
-  const { session, users, getJournals } = useStore()
+  const { session, users, getJournals, loginAsDemo } = useStore()
   const user = users.find(u => u.id === session.userId)
   const [activeTab, setActiveTab] = useState<JournalTab>('entries')
   const [selectedDiscipline, setSelectedDiscipline] = useState<string>('')
@@ -91,11 +91,19 @@ export default function TrainingJournal() {
   if (!user) {
     return (
       <div className="min-h-screen bg-[var(--color-bg)] flex items-center justify-center">
-        <div className="text-[var(--color-text-muted)]">
-          <Link to="/login" className="text-[var(--color-primary)] hover:underline">
-            Login
-          </Link>{' '}
-          to access your journal
+        <div className="text-center space-y-3">
+          <div className="text-[var(--color-text-muted)]">
+            <Link to="/login" className="text-[var(--color-primary)] hover:underline">
+              Login
+            </Link>{' '}
+            to access your journal
+          </div>
+          <button
+            onClick={() => loginAsDemo()}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--color-primary)] text-white hover:opacity-90 transition-opacity"
+          >
+            Continue as Demo
+          </button>
         </div>
       </div>
     )

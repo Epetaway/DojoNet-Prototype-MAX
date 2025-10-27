@@ -4,6 +4,65 @@ import { api, USE_BACKEND } from './lib/api'
 
 function uid(prefix='id') { return `${prefix}_${Date.now()}_${Math.random().toString(36).substr(2,9)}`; }
 
+const DEMO_USER = {
+  id: 'u_demo',
+  name: 'Demo User',
+  handle: 'u_demo',
+  avatar: 'https://i.pravatar.cc/200?img=68',
+  rank: 'BJJ Blue Belt',
+  gym: 'DojoNet Academy',
+  location: 'Los Angeles, CA',
+  bio: 'Just a white belt on the path. OSS!',
+  status: 'Training tonight 🥋',
+};
+
+// Seed demo journal entries
+const seedDemoJournals = () => {
+  const key = `journals_${DEMO_USER.id}`;
+  if (localStorage.getItem(key)) return;
+  
+  const now = new Date();
+  const entries = [
+    {
+      id: 'j_demo_1',
+      userId: DEMO_USER.id,
+      title: 'BJJ Class – Guard Retention',
+      body: 'Drilled hip escapes, knee shields. Struggled vs pressure passing. Note to frame earlier.',
+      createdAt: new Date(now.getTime() - 1000 * 60 * 60 * 24 * 2).toISOString(),
+      journalMeta: {
+        art: 'BJJ',
+        sessionType: 'Class',
+        durationMin: 90,
+        techniques: ['Hip Escape', 'Knee Shield', 'Collar Tie'],
+        mood: 'good',
+        energy: 7,
+        intensity: 6,
+        recovery: 6,
+        injured: false,
+      },
+    },
+    {
+      id: 'j_demo_2',
+      userId: DEMO_USER.id,
+      title: 'Open Mat – Sparring Rounds',
+      body: '5x5 min. Caught armbar, got swept from half. Need underhook earlier.',
+      createdAt: new Date(now.getTime() - 1000 * 60 * 60 * 24).toISOString(),
+      journalMeta: {
+        art: 'BJJ',
+        sessionType: 'Sparring',
+        durationMin: 60,
+        techniques: ['Armbar', 'Half Guard Sweep Defense'],
+        mood: 'neutral',
+        energy: 6,
+        intensity: 8,
+        recovery: 5,
+        injured: false,
+      },
+    },
+  ];
+  localStorage.setItem(key, JSON.stringify(entries));
+};
+
 const seedUsers = () => ([
   { id:'u_demo', name:'Demo User', rank:'Blue Belt', gym:'AMA Fight Club', location:'Los Angeles, CA',
     bio:'Just a white belt on the path. OSS!', status:'Training tonight 🥋',
@@ -243,6 +302,14 @@ export const useStore = create((set, get) => ({
   logout(){
     const session = { userId: null };
     set({ session }); LS.set('session', session);
+  },
+  loginAsDemo(){
+    const session = { userId: DEMO_USER.id };
+    localStorage.setItem('session', JSON.stringify(session));
+    seedDemoJournals();
+    set({ session }); 
+    LS.set('session', session);
+    return { ok: true, user: DEMO_USER };
   },
   signUp({ name, location }){
     const id = uid('u');
