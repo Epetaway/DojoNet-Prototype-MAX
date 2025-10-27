@@ -1,5 +1,5 @@
   // Get journals for a user (for dashboard widgets)
-  getJournals(userId: string, filters: any = {}) {
+  getJournals(userId, filters = {}) {
     // Try to load from localStorage (seeded by demo-data.json)
     const journals = LS.get(`journals_${userId}`, []) as any[];
     // Optionally filter
