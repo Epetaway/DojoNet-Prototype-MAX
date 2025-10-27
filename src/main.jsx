@@ -13,8 +13,20 @@ initTheme()
 if (import.meta.env.DEV) {
   ensureDemoAccount()
 }
+
+// GitHub Pages SPA fallback handling
+(function() {
+  var redirect = sessionStorage.redirect;
+  delete sessionStorage.redirect;
+  if (redirect && redirect !== location.href) {
+    history.replaceState(null, null, redirect);
+  }
+})();
+
+const basename = import.meta.env.PROD ? '/DojoNet-Prototype-MAX' : '';
+
 createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
+  <BrowserRouter basename={basename}>
     <ToastProvider>
       <App />
     </ToastProvider>
