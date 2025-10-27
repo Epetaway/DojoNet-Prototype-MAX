@@ -9,10 +9,8 @@ import { initTheme } from './lib/theme'
 import { ensureDemoAccount } from './lib/demo'
 
 initTheme()
-// In dev, create a local demo auth account (id maps to backend-seeded u_demo)
-if (import.meta.env.DEV) {
-  ensureDemoAccount()
-}
+// Create a local demo auth account for GitHub Pages demo
+ensureDemoAccount()
 
 // GitHub Pages SPA fallback handling
 (function() {

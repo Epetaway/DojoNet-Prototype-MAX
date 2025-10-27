@@ -3,8 +3,26 @@
 
 [![Deploy Status](https://img.shields.io/badge/deploy-ready-success)]()
 [![Built with Vite](https://img.shields.io/badge/built%20with-Vite-646CFF)]()
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://epetaway.github.io/DojoNet-Prototype-MAX/)
 
 **DojoNet** is a modern social networking platform designed for martial artists to connect, train, and grow together. This demo showcases the core features including training journals, partner matchmaking, forums, events, and more.
+
+## 🌐 Live Demo
+
+**[View Live Demo on GitHub Pages](https://epetaway.github.io/DojoNet-Prototype-MAX/)**
+
+### Demo Credentials
+- **Quick Access**: Click "Continue as Demo" on login page
+- **Email**: demo@dojonet.local
+- **Password**: DojoNetDemo2024!
+
+## 🎯 Static Demo Mode
+
+This app is configured to run 100% statically on GitHub Pages without a backend server:
+- ✅ All data stored in browser localStorage
+- ✅ Demo events and sample data built-in
+- ✅ Full feature demonstration without server
+- ✅ Works offline after first load
 
 ## 🥋 Features
 

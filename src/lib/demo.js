@@ -8,10 +8,7 @@ export const DEMO_USER_ID = 'u_demo'
 
 export function ensureDemoAccount(){
   try{
-    // Only activate in dev mode
-    const isDev = typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.DEV
-    if(!isDev) return
-    
+    // Enable in both dev AND production for GitHub Pages demo
     const exists = accountForEmail(DEMO_EMAIL)
     if(!exists){
       createAccount({ name:'Demo User', email: DEMO_EMAIL, password: DEMO_PASSWORD, userId: DEMO_USER_ID })
