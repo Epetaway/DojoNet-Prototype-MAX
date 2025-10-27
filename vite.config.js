@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   // For GitHub Pages deployment, uncomment and set your repo name:
-  // base: '/DojoNet-Local-Prototype-MAX/',
+  base: 'Epetaway/DojoNet-Local-Prototype-MAX/',
   server: {
     proxy: {
       // Forward API calls to the local Express server during development
