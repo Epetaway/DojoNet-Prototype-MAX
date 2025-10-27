@@ -6,6 +6,13 @@ export default defineConfig({
   plugins: [react()],
   // For GitHub Pages deployment
   base: '/DojoNet-Prototype-MAX/',
+  build: {
+    // Enable clearer stack traces on GitHub Pages to diagnose runtime errors
+    sourcemap: true,
+    // Disable minification temporarily to avoid opaque minified stacks like H8(...)
+    // Re-enable later once the error is fully resolved
+    minify: false,
+  },
   server: {
     proxy: {
       // Forward API calls to the local Express server during development
