@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, HashRouter } from 'react-router-dom'
 import App from './App.jsx'
 import './index.css'
 import ToastProvider from './components/ToastProvider.jsx'
@@ -21,12 +21,21 @@ ensureDemoAccount()
   }
 })();
 
-const basename = import.meta.env.PROD ? '/DojoNet-Prototype-MAX' : '';
+const isProd = import.meta.env.PROD
+const basename = isProd ? '/DojoNet-Prototype-MAX' : ''
 
 createRoot(document.getElementById('root')).render(
-  <BrowserRouter basename={basename}>
-    <ToastProvider>
-      <App />
-    </ToastProvider>
-  </BrowserRouter>
+  isProd ? (
+    <HashRouter>
+      <ToastProvider>
+        <App />
+      </ToastProvider>
+    </HashRouter>
+  ) : (
+    <BrowserRouter basename={basename}>
+      <ToastProvider>
+        <App />
+      </ToastProvider>
+    </BrowserRouter>
+  )
 )
