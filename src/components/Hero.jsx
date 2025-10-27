@@ -1,11 +1,13 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useStore } from '../app/store'
 import { Button } from '.'
 import { getPlaceholders } from '../lib/placeholders'
 import AttributionBadge from './AttributionBadge.jsx'
 
 export default function Hero(){
   const navigate = useNavigate()
+  const { session, loginAsDemo } = useStore()
   const [bg, setBg] = React.useState(null)
   const [bgItem, setBgItem] = React.useState(null)
   const [term, setTerm] = React.useState('')
@@ -47,6 +49,14 @@ export default function Hero(){
         </form>
 
         <div className="mt-6 flex items-center justify-center gap-3 flex-wrap">
+          {!session.userId && (
+            <button
+              onClick={() => { loginAsDemo?.(); navigate('/dashboard') }}
+              className="h-11 px-6 rounded-xl bg-[var(--color-primary)] text-white hover:opacity-90 transition"
+            >
+              Continue as Demo
+            </button>
+          )}
           <Link to="/signup"><Button className="h-11 px-6">Join Free</Button></Link>
           <Link to="/login"><Button variant="outline" className="h-11 px-6">Login</Button></Link>
         </div>

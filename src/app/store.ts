@@ -10,6 +10,7 @@ type AuthSlice = {
   login: (nameLike: string) => { ok: boolean; user?: User; message?: string }
   logout: () => void
   signUp: (input: { name: string; location: string }) => User
+  loginAsDemo?: () => { ok: boolean; user?: User }
 }
 
 type UsersSlice = {
@@ -83,6 +84,38 @@ export const useStore = create<StoreState>((set, get) => ({
     const session = { userId: id }; set({ session }); LS.set('session', session)
     if (USE_BACKEND) { api('POST', '/users', user).catch(()=>{}) }
     return user
+  },
+  loginAsDemo() {
+    // Ensure a demo user exists in users list
+    const DEMO_ID = 'u_demo'
+    const existing = get().users
+    let users = existing
+    if (!existing.find(u => u.id === DEMO_ID)) {
+      const demo: User = {
+        id: DEMO_ID,
+        name: 'Demo User',
+        role: 'instructor',
+        rank: 'Black Belt',
+        gym: 'Bay City BJJ',
+        location: 'San Francisco, CA',
+        bio: 'This is a rich demo profile packed with activity.',
+        status: 'Rolling tonight!',
+        avatar: 'https://i.pravatar.cc/200?img=5',
+        banner: '',
+        theme: 'tatami',
+        layout: { left: ['bio','belt','gym','badges'], right: ['posts','friends','stats'] },
+        playlist: '',
+        posts: [],
+        friends: [], following: [], followers: [], dojoCircle: [], comments: [],
+        verifiedGym: false,
+        rankLevel: 5,
+      }
+      users = [...existing, demo]
+      set({ users }); LS.set('users', users)
+    }
+    const session = { userId: DEMO_ID }
+    set({ session }); LS.set('session', session)
+    return { ok: true, user: users.find(u => u.id === DEMO_ID) }
   },
 
   // Users slice
