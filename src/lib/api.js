@@ -5,10 +5,17 @@ export const USE_BACKEND = false;
 const BASE = '/api';
 
 export async function api(method, path, body){
-  // In static mode, return empty response
+  // In static mode, fake minimal endpoints to keep UI stable
   if (!USE_BACKEND) {
-    console.log('[Static Mode] API call skipped:', method, path);
-    return Promise.resolve({});
+    console.log('[Static Mode] API call intercepted:', method, path)
+    const p = String(path || '')
+    if (method === 'GET') {
+      if (p.startsWith('/threads')) return []
+      if (p.startsWith('/events')) return []
+      if (p.startsWith('/users')) return []
+    }
+    // Default fallback
+    return {}
   }
   
   const res = await fetch(`${BASE}${path}`, {

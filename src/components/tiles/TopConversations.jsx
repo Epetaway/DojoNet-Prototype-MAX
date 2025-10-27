@@ -6,7 +6,15 @@ import BentoCard from '../BentoCard'
 
 export default function TopConversations(){
   const [threads, setThreads] = useState(null)
-  useEffect(()=>{ api('GET','/threads?sort=hot').then(setThreads).catch(()=>setThreads([])) }, [])
+  useEffect(()=>{
+    api('GET','/threads?sort=hot')
+      .then((res)=>{
+        // Static mode may return {}; normalize to array
+        const list = Array.isArray(res) ? res : (Array.isArray(res?.threads) ? res.threads : [])
+        setThreads(list)
+      })
+      .catch(()=>setThreads([]))
+  }, [])
   const { ref, visible } = useInView()
   
   const formatTimeAgo = (date) => {
@@ -22,7 +30,7 @@ export default function TopConversations(){
       <BentoCard title="Top conversations" subtitle="Hot in your network">
         <div className="overflow-y-auto max-h-[250px] scrollbar-thin scrollbar-thumb-zinc-300 dark:scrollbar-thumb-zinc-700 scrollbar-track-transparent hover:scrollbar-thumb-zinc-400 dark:hover:scrollbar-thumb-zinc-600 pr-1">
           <ul>
-            {(threads||[]).slice(0,8).map(t => (
+            {(Array.isArray(threads) ? threads : []).slice(0,8).map(t => (
               <li key={t.id} className="py-3">
                 <Link 
                   to={`/thread/${t.id}`}
