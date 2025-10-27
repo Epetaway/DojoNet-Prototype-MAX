@@ -1,11 +1,11 @@
 
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-
+const repo = 'DojoNet-Prototype-MAX'
 export default defineConfig({
   plugins: [react()],
   // For GitHub Pages deployment, uncomment and set your repo name:
-  base: 'Epetaway/DojoNet-Prototype-MAX/',
+  base: '/${repo}/',
   server: {
     proxy: {
       // Forward API calls to the local Express server during development
