@@ -68,6 +68,51 @@ export const useStore = create<StoreState>((set, get) => ({
     }
     return { ok: false, message: 'User not found. Try Sign Up.' }
   },
+
+  // Auto-login as demo user if no session exists
+  ...(typeof window !== 'undefined' && !LS.get('session', { userId: null }).userId ? (() => {
+    const DEMO_ID = 'u_demo';
+    // Seed demo data
+    (async () => {
+      try {
+        const res = await fetch('/DojoNet-Prototype-MAX/demo-data.json');
+        const demoData = await res.json();
+        LS.set('users', demoData.users);
+        LS.set('journals_u_demo', demoData.journals);
+        LS.set('techniques_u_demo', demoData.techniques);
+        LS.set('goals_u_demo', demoData.goals);
+        LS.set('sparring_u_demo', demoData.sparring);
+        LS.set('partners_u_demo', demoData.partners);
+        set({ users: demoData.users, session: { userId: DEMO_ID } });
+        LS.set('session', { userId: DEMO_ID });
+      } catch (e) {
+        // fallback: just add demo user
+        const demo = {
+          id: DEMO_ID,
+          name: 'Demo User',
+          role: 'instructor' as import('../types').Role,
+          rank: 'Black Belt',
+          gym: 'Bay City BJJ',
+          location: 'San Francisco, CA',
+          bio: 'This is a rich demo profile packed with activity.',
+          status: 'Rolling tonight!',
+          avatar: 'https://i.pravatar.cc/200?img=5',
+          banner: '',
+          theme: 'tatami',
+          layout: { left: ['bio','belt','gym','badges'], right: ['posts','friends','stats'] },
+          playlist: '',
+          posts: [],
+          friends: [], following: [], followers: [], dojoCircle: [], comments: [],
+          verifiedGym: false,
+          rankLevel: 5,
+        };
+        LS.set('users', [demo]);
+        set({ users: [demo], session: { userId: DEMO_ID } });
+        LS.set('session', { userId: DEMO_ID });
+      }
+    })();
+    return {};
+  })() : {}),
   logout() {
     const session = { userId: null }
     set({ session }); LS.set('session', session)
