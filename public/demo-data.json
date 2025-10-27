@@ -6,7 +6,12 @@
       "handle": "u_demo",
       "avatar": "https://i.pravatar.cc/200?img=5",
       "belt": "BJJ Blue Belt",
-      "gym": "DojoNet Academy"
+      "gym": "DojoNet Academy",
+      "friends": [],
+      "following": [],
+      "followers": [],
+      "dojoCircle": [],
+      "comments": []
     }
   ],
   "journals": [
