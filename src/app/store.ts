@@ -86,36 +86,58 @@ export const useStore = create<StoreState>((set, get) => ({
     return user
   },
   loginAsDemo() {
-    // Ensure a demo user exists in users list
+    // Ensure a demo user exists in users list and seed demo data
     const DEMO_ID = 'u_demo'
-    const existing = get().users
-    let users = existing
-    if (!existing.find(u => u.id === DEMO_ID)) {
-      const demo: User = {
-        id: DEMO_ID,
-        name: 'Demo User',
-        role: 'instructor',
-        rank: 'Black Belt',
-        gym: 'Bay City BJJ',
-        location: 'San Francisco, CA',
-        bio: 'This is a rich demo profile packed with activity.',
-        status: 'Rolling tonight!',
-        avatar: 'https://i.pravatar.cc/200?img=5',
-        banner: '',
-        theme: 'tatami',
-        layout: { left: ['bio','belt','gym','badges'], right: ['posts','friends','stats'] },
-        playlist: '',
-        posts: [],
-        friends: [], following: [], followers: [], dojoCircle: [], comments: [],
-        verifiedGym: false,
-        rankLevel: 5,
+    const seedDemo = async () => {
+      try {
+        const res = await fetch('/DojoNet-Prototype-MAX/demo-data.json');
+        const demoData = await res.json();
+        // Seed users
+        LS.set('users', demoData.users);
+        // Seed journals
+        LS.set('journals_u_demo', demoData.journals);
+        // Seed techniques
+        LS.set('techniques_u_demo', demoData.techniques);
+        // Seed goals
+        LS.set('goals_u_demo', demoData.goals);
+        // Seed sparring
+        LS.set('sparring_u_demo', demoData.sparring);
+        // Seed partners
+        LS.set('partners_u_demo', demoData.partners);
+        set({ users: demoData.users });
+      } catch (e) {
+        // fallback: just add demo user
+        const existing = get().users
+        let users = existing
+        if (!existing.find(u => u.id === DEMO_ID)) {
+          const demo: User = {
+            id: DEMO_ID,
+            name: 'Demo User',
+            role: 'instructor',
+            rank: 'Black Belt',
+            gym: 'Bay City BJJ',
+            location: 'San Francisco, CA',
+            bio: 'This is a rich demo profile packed with activity.',
+            status: 'Rolling tonight!',
+            avatar: 'https://i.pravatar.cc/200?img=5',
+            banner: '',
+            theme: 'tatami',
+            layout: { left: ['bio','belt','gym','badges'], right: ['posts','friends','stats'] },
+            playlist: '',
+            posts: [],
+            friends: [], following: [], followers: [], dojoCircle: [], comments: [],
+            verifiedGym: false,
+            rankLevel: 5,
+          }
+          users = [...existing, demo]
+          set({ users }); LS.set('users', users)
+        }
       }
-      users = [...existing, demo]
-      set({ users }); LS.set('users', users)
     }
+    seedDemo();
     const session = { userId: DEMO_ID }
     set({ session }); LS.set('session', session)
-    return { ok: true, user: users.find(u => u.id === DEMO_ID) }
+    return { ok: true, user: get().users.find(u => u.id === DEMO_ID) }
   },
 
   // Users slice
