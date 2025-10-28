@@ -9,9 +9,8 @@ export default defineConfig({
   build: {
     // Enable clearer stack traces on GitHub Pages to diagnose runtime errors
     sourcemap: true,
-    // Disable minification temporarily to avoid opaque minified stacks like H8(...)
-    // Re-enable later once the error is fully resolved
-    minify: false,
+    // Re-enable minification for production build
+    minify: true,
   },
   server: {
     proxy: {
