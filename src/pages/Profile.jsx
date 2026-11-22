@@ -31,7 +31,7 @@ function Affiliation({user, update}){
   return <Card className="p-4"><SectionHeader title="Affiliation" /><input className="input" aria-label="Affiliation" value={user.gym} onChange={e=>update({gym:e.target.value})} placeholder="Your affiliation (gym/school)" /><div className="mt-2 text-xs text-[var(--color-text-muted)]">{user.location}</div></Card>
 }
 function Badges(){ return <Card className="p-4"><SectionHeader title="Badges"/><div className="flex gap-2 text-xl"><span role="img" aria-label="fire">🔥</span><span role="img" aria-label="verified">✅</span><span role="img" aria-label="mind">🧠</span><span role="img" aria-label="trophy">🏆</span></div></Card> }
-function Posts({user}){ return <Card className="p-4"><SectionHeader title="Recent Posts" /><ul className="space-y-2">{user.posts.slice(0,6).map(p=><li key={p.id} className="text-sm">• {p.title} <span className="text-xs text-[var(--color-text-muted)]">({p.date}{p.type==='tutorial'?' • tutorial':''})</span></li>)}</ul></Card> }
+function Posts({user}){ return <Card className="p-4"><SectionHeader title="Recent Posts" /><ul className="space-y-2">{(user.posts||[]).slice(0,6).map(p=><li key={p.id} className="text-sm">• {p.title} <span className="text-xs text-[var(--color-text-muted)]">({p.date}{p.type==='tutorial'?' • tutorial':''})</span></li>)}</ul></Card> }
 function Friends({user}){ const { users } = useStore(); const list = users.filter(u=>u.id!==user.id).slice(0,8); return <Card className="p-4"><SectionHeader title="Dojo Circle" /><div className="grid grid-cols-4 gap-3">{list.map(f=>(<div key={f.id} className="text-center"><img src={f.avatar} alt="" aria-hidden="true" className="avatar avatar-lg mx-auto"/><div className="text-[11px] text-[var(--color-text-muted)] truncate mt-1">{f.name}</div></div>))}</div></Card> }
 function Stats(){ return <Card className="p-4"><SectionHeader title="Training Stats"/><div className="grid grid-cols-3 text-center gap-3"><div><div className="text-2xl font-bold">6h</div><div className="text-xs text-[var(--color-text-muted)]">This week</div></div><div><div className="text-2xl font-bold">34</div><div className="text-xs text-[var(--color-text-muted)]">Sessions</div></div><div><div className="text-2xl font-bold">3</div><div className="text-xs text-[var(--color-text-muted)]">Seminars</div></div></div></Card> }
 
@@ -63,6 +63,8 @@ function Top8Editor({user}){
 }
 
 const WIDGETS = { bio:Bio, belt:Belt, gym:Affiliation, badges:Badges, posts:Posts, friends:Friends, stats:Stats }
+// Profiles saved without a layout (the demo data has none) get the default one.
+const DEFAULT_LAYOUT = { left: ['bio','belt','gym','badges'], right: ['posts','friends','stats'] }
 
 export default function Profile(){
   const { id } = useParams()
@@ -75,14 +77,16 @@ export default function Profile(){
   const skin = SKINS.find(s=>s.key===user.theme) || SKINS[0]
   const accent = ACCENT(skin.accent)
 
+  const layout = user.layout?.left && user.layout?.right ? user.layout : DEFAULT_LAYOUT
+
   const onDragStart = (wid)=>(e)=>{ if(!isMe) return; e.dataTransfer.setData('text/plain', wid) }
   const allowDrop = e=> isMe && e.preventDefault()
   const onDropTo = (side)=>(e)=>{
     if(!isMe) return;
     e.preventDefault()
     const id = e.dataTransfer.getData('text/plain')
-    const left = user.layout.left.filter(w=>w!==id)
-    const right = user.layout.right.filter(w=>w!==id)
+    const left = layout.left.filter(w=>w!==id)
+    const right = layout.right.filter(w=>w!==id)
     const next = { left, right }
     next[side] = [...next[side], id]
     reorderLayout(user.id, next)
@@ -149,10 +153,10 @@ export default function Profile(){
           {/* Layout */}
           <div className="max-w-6xl mx-auto px-4 mt-6 grid grid-cols-1 md:grid-cols-12 gap-6">
             <div className="md:col-span-7 space-y-6" onDragOver={allowDrop} onDrop={onDropTo('left')}>
-              {user.layout.left.map(id=>{ const W=WIDGETS[id]; return <div key={id} draggable={isMe} onDragStart={onDragStart(id)} className={isMe?'cursor-move':''}><W user={user} update={isMe?update:()=>{}} accent={accent} /></div> })}
+              {layout.left.map(id=>{ const W=WIDGETS[id]; return <div key={id} draggable={isMe} onDragStart={onDragStart(id)} className={isMe?'cursor-move':''}><W user={user} update={isMe?update:()=>{}} accent={accent} /></div> })}
             </div>
             <div className="md:col-span-5 space-y-6" onDragOver={allowDrop} onDrop={onDropTo('right')}>
-              {user.layout.right.map(id=>{ const W=WIDGETS[id]; return <div key={id} draggable={isMe} onDragStart={onDragStart(id)} className={isMe?'cursor-move':''}><W user={user} update={isMe?update:()=>{}} accent={accent} /></div> })}
+              {layout.right.map(id=>{ const W=WIDGETS[id]; return <div key={id} draggable={isMe} onDragStart={onDragStart(id)} className={isMe?'cursor-move':''}><W user={user} update={isMe?update:()=>{}} accent={accent} /></div> })}
             </div>
           </div>
           {/* Extended sections */}
@@ -181,8 +185,8 @@ export default function Profile(){
           <Card className="p-4">
             <SectionHeader title="Videos" />
             <ul className="space-y-2">
-              {user.posts.filter(p=>p.type==='video').length ? (
-                user.posts.filter(p=>p.type==='video').map(p => (
+              {(user.posts||[]).filter(p=>p.type==='video').length ? (
+                (user.posts||[]).filter(p=>p.type==='video').map(p => (
                   <li key={p.id} className="text-sm">• {p.title} <span className="text-xs text-[var(--color-text-muted)]">({p.date})</span></li>
                 ))
               ) : (

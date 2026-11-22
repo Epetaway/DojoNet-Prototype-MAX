@@ -5,7 +5,9 @@
 [![Built with Vite](https://img.shields.io/badge/built%20with-Vite-646CFF)]()
 [![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://epetaway.github.io/DojoNet-Prototype-MAX/)
 
-**DojoNet** is a modern social networking platform designed for martial artists to connect, train, and grow together. This demo showcases the core features including training journals, partner matchmaking, forums, events, and more.
+**DojoNet** is a modern social networking platform designed for martial artists to connect, train, and grow together.
+
+> **Evaluating this project?** Start with the [project wiki](docs/wiki/README.md): the problem, design, architecture, decisions and lessons, including what I'd do differently. DojoNet is a front-end prototype with fictional demo data; it has no real users or backend. This demo showcases the core features including training journals, partner matchmaking, forums, events, and more.
 
 ## 🌐 Live Demo
 

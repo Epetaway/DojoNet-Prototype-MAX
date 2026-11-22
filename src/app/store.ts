@@ -2,6 +2,9 @@ import { create } from 'zustand'
 import { LS, uid } from '../lib/storage'
 import { USE_BACKEND, api } from '../lib/api'
 import type { User } from '../types'
+// Pages written before this store still read the older one in src/store.js. It loads the
+// session once at import, before the demo data below arrives, so it's updated here too.
+import { useStore as useLegacyStore } from '../store'
 
 export type Session = { userId: string | null }
 
@@ -93,6 +96,7 @@ export const useStore = create<StoreState>((set, get) => ({
         LS.set('partners_u_demo', demoData.partners);
         set({ users: demoData.users, session: { userId: DEMO_ID } });
         LS.set('session', { userId: DEMO_ID });
+        useLegacyStore.setState({ users: demoData.users, session: { userId: DEMO_ID } });
       } catch (e) {
         // fallback: just add demo user
         const demo = {
@@ -117,6 +121,7 @@ export const useStore = create<StoreState>((set, get) => ({
         LS.set('users', [demo]);
         set({ users: [demo], session: { userId: DEMO_ID } });
         LS.set('session', { userId: DEMO_ID });
+        useLegacyStore.setState({ users: [demo], session: { userId: DEMO_ID } });
       }
     })();
     return {};
